@@ -8,7 +8,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "build:android:dev": "eas build -p android --profile dev",
+   "build:android:prod": "eas build -p android --profile prod",
+    "submit:android:prod": "eas submit -p android --profile prod"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
