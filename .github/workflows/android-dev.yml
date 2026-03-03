@@ -1,0 +1,36 @@
+name: 🧪 Android Dev Build
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-dev:
+    name: Build Android (Dev)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: ⚡ Install EAS CLI
+        run: npm install --global eas-cli
+
+      - name: 🔐 Authenticate with Expo
+        run: eas whoami
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 🏗 Build Android (Dev Profile)
+        run: eas build --platform android --profile dev --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
