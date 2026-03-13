@@ -9,9 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-	  "bundleIdentifier": "com.ai4magic.brightmindsmobile",
-      "supportsTablet": true,
-	  "buildNumber": "1.0.0"
+      "supportsTablet": true
     },
     "android": {
       "package": "com.vasanthbitu.brightmindsmobile",
