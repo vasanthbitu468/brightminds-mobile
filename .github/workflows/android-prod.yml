@@ -11,31 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
+      - name: CCheckout repository
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: 📦 Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: ⚡ Install EAS CLI
+      - name: Install Expo CLI
         run: npm install --global eas-cli
 
-      - name: 🔐 Authenticate with Expo
-        run: eas whoami
+      - name: Build iOS
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas build --platform ios --profile production --non-interactive
 
-      - name: 🏗 Build Android App (AAB)
-        run: eas build --platform android --profile prod --non-interactive
+      - name: Submit to App Store
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: 🚀 Submit to Google Play Store
-        run: eas submit --platform android --profile prod --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas submit --platform ios --profile production --non-interactive
